@@ -1,9 +1,9 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { updateBudgetItem, deleteBudgetItem } from "@/src/actions/budget";
 
 export async function PATCH(
-    request: Response,
-    { params }: { params: Promise<{ id: string }> }
+    request: NextRequest,
+    { params }: { params: { id: string } }
 
 ) {
     try {
@@ -34,8 +34,8 @@ export async function PATCH(
 }
 
 export async function DELETE(
-    _: Request,
-    { params }: { params: Promise<{ id: string }> }
+    request: NextRequest,
+    { params }: { params: { id: string } }
 ) {
     try {
 
