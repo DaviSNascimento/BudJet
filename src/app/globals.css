@@ -4,6 +4,47 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+
+  --color-lemon-lime-50: oklch(98.94% 0.030 110.98);
+  --color-lemon-lime-100: oklch(97.93% 0.061 111.47);
+  --color-lemon-lime-200: oklch(95.96% 0.115 112.09);
+  --color-lemon-lime-300: oklch(94.44% 0.162 113.25);
+  --color-lemon-lime-400: oklch(93.10% 0.194 114.61);
+  --color-lemon-lime-500: oklch(92.07% 0.209 115.65);
+  --color-lemon-lime-600: oklch(77.81% 0.176 115.58);
+  --color-lemon-lime-700: oklch(62.95% 0.141 115.02);
+  --color-lemon-lime-800: oklch(47.05% 0.104 114.61);
+  --color-lemon-lime-900: oklch(29.92% 0.065 114.67);
+  --color-lemon-lime-950: oklch(24.09% 0.051 114.65);
+
+
+
+  --color-olive-leaf-50: oklch(98.34% 0.032 126.24);
+  --color-olive-leaf-100: oklch(96.75% 0.065 126.35);
+  --color-olive-leaf-200: oklch(93.77% 0.127 127.85);
+  --color-olive-leaf-300: oklch(91.25% 0.182 129.05);
+  --color-olive-leaf-400: oklch(89.11% 0.223 130.76);
+  --color-olive-leaf-500: oklch(87.30% 0.246 133.26);
+  --color-olive-leaf-600: oklch(73.91% 0.207 132.98);
+  --color-olive-leaf-700: oklch(59.82% 0.166 132.75);
+  --color-olive-leaf-800: oklch(44.84% 0.123 132.33);
+  --color-olive-leaf-900: oklch(28.53% 0.075 130.41);
+  --color-olive-leaf-950: oklch(23.05% 0.059 129.13);
+
+
+
+  --color-mint-leaf-50: oklch(97.37% 0.020 181.13);
+  --color-mint-leaf-100: oklch(95.06% 0.040 180.89);
+  --color-mint-leaf-200: oklch(90.35% 0.075 180.10);
+  --color-mint-leaf-300: oklch(86.22% 0.107 177.52);
+  --color-mint-leaf-400: oklch(82.46% 0.131 175.80);
+  --color-mint-leaf-500: oklch(79.48% 0.147 172.97);
+  --color-mint-leaf-600: oklch(67.23% 0.123 173.24);
+  --color-mint-leaf-700: oklch(54.65% 0.099 173.06);
+  --color-mint-leaf-800: oklch(41.05% 0.072 174.72);
+  --color-mint-leaf-900: oklch(26.47% 0.044 175.28);
+  --color-mint-leaf-950: oklch(21.69% 0.034 175.30);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
@@ -119,11 +160,9 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
-  h1{
-    font-weight: 600;
-    
-  }
+
 }
