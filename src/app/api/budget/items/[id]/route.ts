@@ -3,8 +3,7 @@ import { updateBudgetItem, deleteBudgetItem } from "@/src/actions/budget";
 
 export async function PATCH(
     request: NextRequest,
-    { params }: { params: { id: string } }
-
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
         const { id } = await params;
@@ -14,36 +13,13 @@ export async function PATCH(
             item_id: id,
             description: body.description,
             quantity: body.quantity,
-            unit_price: body.unit_price
+            unit_price: body.unit_price,
         });
 
         return NextResponse.json({
             ok: true,
-            data: updateItem
-        })
-
-
-    } catch (error: unknown) {
-        const errorMessage =
-            error instanceof Error ? error.message : "Erro desconhecido"
-
-        return NextResponse.json(
-            { ok: false, error: errorMessage },
-            { status: 400 })
-    }
-}
-
-export async function DELETE(
-    request: NextRequest,
-    { params }: { params: { id: string } }
-) {
-    try {
-
-        const { id } = await params;
-
-        await deleteBudgetItem(id);
-        return NextResponse.json({ ok: true, message: "Item deletado" });
-
+            data: updateItem,
+        });
     } catch (error: unknown) {
         const errorMessage =
             error instanceof Error ? error.message : "Erro desconhecido";
@@ -51,7 +27,30 @@ export async function DELETE(
         return NextResponse.json(
             { ok: false, error: errorMessage },
             { status: 400 }
-        )
+        );
+    }
+}
 
+export async function DELETE(
+    request: NextRequest,
+    { params }: { params: Promise<{ id: string }> }
+) {
+    try {
+        const { id } = await params;
+
+        await deleteBudgetItem(id);
+
+        return NextResponse.json({
+            ok: true,
+            message: "Item deletado",
+        });
+    } catch (error: unknown) {
+        const errorMessage =
+            error instanceof Error ? error.message : "Erro desconhecido";
+
+        return NextResponse.json(
+            { ok: false, error: errorMessage },
+            { status: 400 }
+        );
     }
 }
