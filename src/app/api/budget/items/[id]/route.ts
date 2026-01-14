@@ -1,55 +1,53 @@
 import { NextRequest, NextResponse } from "next/server";
 import { updateBudgetItem, deleteBudgetItem } from "@/src/actions/budget";
 
+type RouteContext = {
+    params: {
+        id: string;
+    };
+};
+
 export async function PATCH(
-    response: NextRequest,
-    { params }: { params: { id: string } }
-
-) {
+    request: NextRequest,
+    { params }: RouteContext
+): Promise<Response> {
     try {
-        const body = await response.json();
+        const body = await request.json();
 
-        const updateItem = await updateBudgetItem({
+        await updateBudgetItem({
             item_id: params.id,
             description: body.description,
             quantity: body.quantity,
-            unit_price: body.unit_price
+            unit_price: body.unit_price,
         });
 
-        return NextResponse.json({
-            ok: true,
-            data: updateItem
-        })
-
-
-    } catch (error: unknown) {
-        const errorMessage =
-            error instanceof Error ? error.message : "Erro desconhecido"
+        return NextResponse.json({ ok: true });
+    } catch (error) {
+        const message =
+            error instanceof Error ? error.message : "Erro desconhecido";
 
         return NextResponse.json(
-            { ok: false, error: errorMessage },
-            { status: 400 })
+            { ok: false, error: message },
+            { status: 400 }
+        );
     }
 }
 
 export async function DELETE(
-    _: NextRequest,
-    { params }: { params: { id: string } }
-) {
+    _request: NextRequest,
+    { params }: RouteContext
+): Promise<Response> {
     try {
-
-
         await deleteBudgetItem(params.id);
-        return NextResponse.json({ ok: true, message: "Item deletado" });
 
-    } catch (error: unknown) {
-        const errorMessage =
+        return NextResponse.json({ ok: true });
+    } catch (error) {
+        const message =
             error instanceof Error ? error.message : "Erro desconhecido";
 
         return NextResponse.json(
-            { ok: false, error: errorMessage },
+            { ok: false, error: message },
             { status: 400 }
-        )
-
+        );
     }
 }
