@@ -1,17 +1,16 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { updateBudgetItem, deleteBudgetItem } from "@/src/actions/budget";
 
 export async function PATCH(
-    request: Response,
-    { params }: { params: Promise<{ id: string }> }
+    response: NextRequest,
+    { params }: { params: { id: string } }
 
 ) {
     try {
-        const { id } = await params;
-        const body = await request.json();
+        const body = await response.json();
 
         const updateItem = await updateBudgetItem({
-            item_id: id,
+            item_id: params.id,
             description: body.description,
             quantity: body.quantity,
             unit_price: body.unit_price
@@ -34,14 +33,13 @@ export async function PATCH(
 }
 
 export async function DELETE(
-    _: Request,
-    { params }: { params: Promise<{ id: string }> }
+    _: NextRequest,
+    { params }: { params: { id: string } }
 ) {
     try {
 
-        const { id } = await params;
 
-        await deleteBudgetItem(id);
+        await deleteBudgetItem(params.id);
         return NextResponse.json({ ok: true, message: "Item deletado" });
 
     } catch (error: unknown) {
