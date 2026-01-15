@@ -1,5 +1,4 @@
 .body {
     height: 100vh;
-    color: white;
-    background-color: rgb(54, 54, 54);
+    margin: 0;
 }
